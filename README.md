@@ -22,9 +22,11 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
               "if" <parenthesis> <block> ("else" "if" <block>)* ('else' <block>)? |
               "while" <parenthesis> <block> |
               'function' <word> '(' <word> (',' <word>)* ')' <block> |
-              <expr> ";"
+              <asign> ";"
               
 <declaration> ::= 'var' WORD ('=' <expr>)?
+
+<asign> ::= <expr> ('=' <expr>)*
 
 <expr> ::= <term> (('==', '!=', '>', '>=', '<', '<=', '=') <term>)*
 
@@ -32,7 +34,7 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
 
 <sum> ::= <fact> (('*', '/') <fact>)*
 
-<fact> ::= <value> | <word> <apply> | <parenthesis> | <array> // Added by: Casiano
+<fact> ::= <value> | WORD <apply> | <parenthesis> | <array> // Added by: Casiano
 
 <apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | '.'<word><apply> | empty
 
