@@ -10,6 +10,14 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
 
 * La variable `<value>` no se describe (y debería describirse)
 
+Ejemplos:
+
+[4,5,7][0]
+
+b[a=2]
+
+[x => x+1][0](4)
+
 ## Grammar
 
 ```ruby
@@ -36,14 +44,19 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
 
 <sum> ::= <fact> (('*', '/') <fact>)*
 
-<fact> ::= <value> | WORD <apply> | <parenthesis> | <array> // Added by: Casiano
+//<fact> ::= <value> | WORD <apply> | <parenthesis> | <array> // Added by: Casiano
+<fact> ::= <value> | <parenthesis> //Para que sea LL (las reglas que se invocan deben empezar siempre de forma distinta)
 
-<apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | '.'<word><apply> | empty
+<apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | '.'WORD<apply> | empty
 
 <array> ::= '[' ']' | '[' <expr> (',' <expr> )*] // Added by Casiano
 
 <parenthesis> ::= '(' <expr> ')'
+
+<value> : (VALUE | WORD | <array>) (. WORD | '[' <expr> ']' | <apply>)*  
 ```
+
+
 
 ## Tokens
 
